@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wael's Fake Website</title>
+    <!-- amplitude snippet -->
+    <script type="text/javascript">
+      (function (e, t) {
+        var n = e.amplitude || { _q: [], _iq: {} };
+        var r = t.createElement('script');
+        r.type = 'text/javascript';
+        r.integrity =
+          'sha384-u0hlTAJ1tNefeBKwiBNwB4CkHZ1ck4ajx/pKmwWtc+IufKJiCQZ+WjJIi+7C6Ntm';
+        r.crossOrigin = 'anonymous';
+        r.async = true;
+        r.src = 'https://cdn.amplitude.com/libs/amplitude-8.1.0-min.gz.js';
+        r.onload = function () {
+          if (!e.amplitude.runQueuedFunctions) {
+            console.log('[Amplitude] Error: could not load SDK');
+          }
+        };
+        var i = t.getElementsByTagName('script')[0];
+        i.parentNode.insertBefore(r, i);
+        function s(e, t) {
+          e.prototype[t] = function () {
+            this._q.push([t].concat(Array.prototype.slice.call(arguments, 0)));
+            return this;
+          };
+        }
+        var o = function () {
+          this._q = [];
+          return this;
+        };
+        var a = [
+          'add',
+          'append',
+          'clearAll',
+          'prepend',
+          'set',
+          'setOnce',
+          'unset',
+          'preInsert',
+          'postInsert',
+          'remove',
+        ];
+        for (var c = 0; c < a.length; c++) {
+          s(o, a[c]);
+        }
+        n.Identify = o;
+        var u = function () {
+          this._q = [];
+          return this;
+        };
+        var l = [
+          'setProductId',
+          'setQuantity',
+          'setPrice',
+          'setRevenueType',
+          'setEventProperties',
+        ];
+        for (var p = 0; p < l.length; p++) {
+          s(u, l[p]);
+        }
+        n.Revenue = u;
+        var d = [
+          'init',
+          'logEvent',
+          'logRevenue',
+          'setUserId',
+          'setUserProperties',
+          'setOptOut',
+          'setVersionName',
+          'setDomain',
+          'setDeviceId',
+          'enableTracking',
+          'setGlobalUserProperties',
+          'identify',
+          'clearUserProperties',
+          'setGroup',
+          'logRevenueV2',
+          'regenerateDeviceId',
+          'groupIdentify',
+          'onInit',
+          'logEventWithTimestamp',
+          'logEventWithGroups',
+          'setSessionId',
+          'resetSessionId',
+        ];
+        function v(e) {
+          function t(t) {
+            e[t] = function () {
+              e._q.push([t].concat(Array.prototype.slice.call(arguments, 0)));
+            };
+          }
+          for (var n = 0; n < d.length; n++) {
+            t(d[n]);
+          }
+        }
+        v(n);
+        n.getInstance = function (e) {
+          e = (!e || e.length === 0 ? '$default_instance' : e).toLowerCase();
+          if (!Object.prototype.hasOwnProperty.call(n._iq, e)) {
+            n._iq[e] = { _q: [] };
+            v(n._iq[e]);
+          }
+          return n._iq[e];
+        };
+        e.amplitude = n;
+      })(window, document);
+      amplitude.getInstance().init('2648e511b1889c95ce3ca37d4e9c588b');
+      var sessionId = amplitude.getInstance()._sessionId;
+      console.log(sessionId);
+      // My Events functions
+
+      var setUserID = function () {
+        var userId = document.getElementById('UID').value;
+        console.log(userId);
+        amplitude.setUserId(userId);
+      };
+
+      var buttonClicked = function () {
+        amplitude.logEvent('clicked button');
+      };
+
+      var setUserProperties = function () {
+        var FN = document.getElementById('FN').value;
+        var LN = document.getElementById('LN').value;
+        console.log(FN);
+        console.log(LN);
+        amplitude.setUserProperties({ FirstName: FN, lastName: LN });
+      };
+    </script>
+    <!-- amplitude snippet end -->
+    <script>
+      amplitude.init(
+        '2648e511b1889c95ce3ca37d4e9c588b',
+        null,
+        { includeReferrer: true, includeUtm: true, includeGclid: true },
+        function () {
+          alert(amplitude.options.deviceId);
+        }
+      );
+      amplitude.setVersionName('Web');
+      amplitude.logEvent('pageLoad');
+    </script>
+  </head>
+  <body>
+    <h1>Amplitude Certification Website</h1>
+    <label for="UID">Set User ID:</label>
+    <input type="text" id="UID" name="UID" />
+    <input
+      type="button"
+      value="Submit"
+      onclick="setUserID(); buttonClicked()"
+    />
+
+    <br />
+    <br />
+    <label for="FN">First Name:</label>
+    <input type="text" id="FN" name="FN" />
+    <label for="LN">Last Name:</label>
+    <input type="text" id="LN" name="LN" />
+    <input type="button" value="Submit" onclick="setUserProperties(); " />
+    <br />
+    <br />
+
+    <a href="http://www.google.com" onclick="buttonClicked()" target="”_blank”"
+      >Visit Google</a
+    >
+  </body>
+</html>
